@@ -37,7 +37,6 @@ def cmd_parse(args, db):
         return
     txn_classifier = TransactionClassifier()
     categorizer = Categorizer(db)
-    import os
     for f in files:
         path = os.path.join("uploads", f["filename"])
         if not os.path.exists(path):

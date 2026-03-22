@@ -5,7 +5,7 @@ from finance.parsers.base_parser import BaseParser
 class BankStatementParser(BaseParser):
     def _extract_transactions(self, text):
         transactions = []
-        # Credit column pattern requires at least one digit ([\d,]*\d+\.?\d*) to prevent
+        # Debit column pattern requires at least one digit ([\d,]*\d+\.?\d*) to prevent
         # float() from being called on an empty string when only debit is present.
         pattern = (
             r'(\d{2}[/-]\d{2}[/-]\d{4}|\d{2}\s+\w{3}\s+\d{4})'  # date
