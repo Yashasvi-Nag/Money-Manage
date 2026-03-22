@@ -1,0 +1,21 @@
+{
+  "name": "money-manage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No automated tests specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yashasvi-Nag/Money-Manage.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Yashasvi-Nag/Money-Manage/issues"
+  },
+  "homepage": "https://github.com/Yashasvi-Nag/Money-Manage#readme"
+}

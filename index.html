@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Money Manage | Dashboard</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="backdrop"></div>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark"></span>
+        <div>
+          <div class="brand-title">Money Manage</div>
+          <div class="brand-subtitle">Personal finance at a glance</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#overview" class="nav-link active">Dashboard</a>
+        <a href="#budgets" class="nav-link">Budgets</a>
+        <a href="#goals" class="nav-link">Goals</a>
+        <a href="#transactions" class="nav-link">Activity</a>
+      </nav>
+      <div class="actions">
+        <label class="select-wrap" aria-label="Select month">
+          <select id="monthSelect"></select>
+        </label>
+        <button class="btn primary">Add transaction</button>
+      </div>
+    </header>
+
+    <main class="layout" id="overview">
+      <section class="card intro">
+        <div>
+          <p class="eyebrow">Welcome back</p>
+          <h1>Stay on top of your money</h1>
+          <p class="muted">
+            Track your cash flow, monitor budgets, and keep an eye on your
+            goals with a clean, focused dashboard.
+          </p>
+          <div class="chips">
+            <span class="chip positive">On track</span>
+            <span class="chip info">Auto-sync enabled</span>
+            <span class="chip subtle">Updated just now</span>
+          </div>
+        </div>
+        <div class="glance">
+          <div>
+            <p class="label">Current balance</p>
+            <p class="headline" id="balanceValue">$0.00</p>
+            <p class="muted tiny">
+              <span class="pill success">+4.2%</span> vs last month
+            </p>
+          </div>
+          <div class="glance-grid">
+            <div class="mini-card">
+              <p class="label">Income</p>
+              <p id="incomeValue" class="number">$0</p>
+              <span class="pill success">↑ steady</span>
+            </div>
+            <div class="mini-card">
+              <p class="label">Expenses</p>
+              <p id="expenseValue" class="number">$0</p>
+              <span class="pill warning">watch</span>
+            </div>
+            <div class="mini-card">
+              <p class="label">Savings rate</p>
+              <p id="savingsRate" class="number">0%</p>
+              <span class="pill neutral">goal: 25%</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="card chart" aria-labelledby="cashflow-title">
+          <div class="card-header">
+            <div>
+              <p class="eyebrow">Cash flow</p>
+              <h2 id="cashflow-title">Income vs expenses</h2>
+            </div>
+            <div class="badge">Last 6 months</div>
+          </div>
+          <canvas id="cashflowChart" height="240" aria-label="Cash flow chart" role="img"></canvas>
+        </article>
+
+        <article class="card chart" aria-labelledby="spending-title">
+          <div class="card-header">
+            <div>
+              <p class="eyebrow">Spending</p>
+              <h2 id="spending-title">Category breakdown</h2>
+            </div>
+            <div class="badge neutral">Current month</div>
+          </div>
+          <div class="chart-body">
+            <canvas id="spendingChart" height="220" aria-label="Spending by category" role="img"></canvas>
+            <ul class="legend" id="spendingLegend" aria-label="Spending legend"></ul>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid" id="budgets">
+        <article class="card" aria-labelledby="budget-title">
+          <div class="card-header">
+            <div>
+              <p class="eyebrow">Budgets</p>
+              <h2 id="budget-title">Tracking progress</h2>
+            </div>
+            <div class="pill subtle">Auto-refresh</div>
+          </div>
+          <div id="budgetList" class="stack"></div>
+        </article>
+
+        <article class="card" aria-labelledby="goals-title" id="goals">
+          <div class="card-header">
+            <div>
+              <p class="eyebrow">Goals</p>
+              <h2 id="goals-title">Momentum</h2>
+            </div>
+            <div class="pill info">Smart contributions</div>
+          </div>
+          <div id="goalsList" class="stack goals"></div>
+        </article>
+      </section>
+
+      <section class="grid wide" id="transactions">
+        <article class="card" aria-labelledby="activity-title">
+          <div class="card-header">
+            <div>
+              <p class="eyebrow">Recent activity</p>
+              <h2 id="activity-title">Transactions & bills</h2>
+            </div>
+            <div class="pill subtle">Sorted by latest</div>
+          </div>
+          <ul class="activity" id="activityList"></ul>
+        </article>
+
+        <article class="card insights" aria-labelledby="insights-title">
+          <div class="card-header">
+            <div>
+              <p class="eyebrow">Insights</p>
+              <h2 id="insights-title">Quick wins</h2>
+            </div>
+            <div class="pill success">Healthy</div>
+          </div>
+          <ul class="insights-list" id="insightsList"></ul>
+        </article>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
