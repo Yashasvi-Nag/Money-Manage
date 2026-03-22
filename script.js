@@ -1,3 +1,8 @@
+const BASELINE_BALANCE = 24000;
+const BAR_SPACING_MULTIPLIER = 2.2;
+const BAR_GAP = 8;
+const DONUT_INNER_RADIUS_RATIO = 0.55;
+
 const monthlyData = [
   { month: "Oct", income: 5100, expenses: 3320, savings: 1780 },
   { month: "Nov", income: 5250, expenses: 3450, savings: 1800 },
@@ -58,7 +63,7 @@ function formatCurrency(value) {
 
 function updateSummary(monthKey) {
   const month = monthlyData.find((m) => m.month === monthKey) || monthlyData.at(-1);
-  const balance = month.income - month.expenses + 24000;
+  const balance = month.income - month.expenses + BASELINE_BALANCE;
   document.getElementById("balanceValue").textContent = formatCurrency(balance);
   document.getElementById("incomeValue").textContent = formatCurrency(month.income);
   document.getElementById("expenseValue").textContent = formatCurrency(month.expenses);
@@ -204,7 +209,7 @@ function drawCashflowChart() {
   monthlyData.forEach((item, index) => {
     const incomeHeight = (item.income / maxValue) * chartHeight;
     const expenseHeight = (item.expenses / maxValue) * chartHeight;
-    const baseX = padding + index * (barWidth * 2.2);
+    const baseX = padding + index * (barWidth * BAR_SPACING_MULTIPLIER);
 
     ctx.fillStyle = "rgba(45, 212, 191, 0.85)";
     ctx.fillRect(
@@ -216,7 +221,7 @@ function drawCashflowChart() {
 
     ctx.fillStyle = "rgba(244, 63, 94, 0.8)";
     ctx.fillRect(
-      baseX + barWidth + 8,
+      baseX + barWidth + BAR_GAP,
       height - padding - expenseHeight,
       barWidth,
       expenseHeight
@@ -259,7 +264,7 @@ function drawSpendingChart() {
 
   ctx.globalCompositeOperation = "destination-out";
   ctx.beginPath();
-  ctx.arc(centerX, centerY, radius * 0.55, 0, Math.PI * 2);
+  ctx.arc(centerX, centerY, radius * DONUT_INNER_RADIUS_RATIO, 0, Math.PI * 2);
   ctx.fill();
   ctx.globalCompositeOperation = "source-over";
 
