@@ -2,8 +2,16 @@ import re
 import datetime
 from abc import ABC, abstractmethod
 
-# Shared regex for credit card transaction lines (date, description, amount, optional Cr flag)
-CC_TRANSACTION_PATTERN = r'(\d{2}\s+\w{3}\s+\d{4}|\d{2}/\d{2}/\d{4})\s+(.+?)\s+([\d,]+\.\d{2})(Cr)?'
+# Shared regex for credit card transaction lines (date, description, amount, optional Cr flag).
+# The amount group requires digits, optional thousands commas, a decimal point, and exactly two
+# decimal digits (e.g. "1,234.56") so the non-greedy description group cannot accidentally
+# consume the amount.
+CC_TRANSACTION_PATTERN = (
+    r'(\d{2}\s+\w{3}\s+\d{4}|\d{2}/\d{2}/\d{4})'   # date
+    r'\s+(.+?)'                                         # description (non-greedy)
+    r'\s+(\d[\d,]*\.\d{2})'                            # amount: must start with a digit
+    r'(Cr)?'                                            # optional credit flag
+)
 # Shared regex for total purchases / total debits line on credit card statements
 CC_TOTAL_PATTERN = r'(?:total\s+purchases?|total\s+debits?)[:\s]+([\d,]+\.\d{2})'
 
@@ -52,3 +60,39 @@ class BaseParser(ABC):
             except ValueError:
                 continue
         return date_str
+
+
+class CreditCardParser(BaseParser):
+    """Shared implementation for HDFC credit card statement parsers.
+
+    Concrete subclasses (e.g. RegaliaParser, SwiggyCardParser) inherit this
+    logic and may override it to handle card-specific format variations.
+    """
+
+    def __init__(self):
+        self.stated_total = 0.0
+
+    def _extract_transactions(self, text):
+        transactions = []
+        for match in re.finditer(CC_TRANSACTION_PATTERN, text):
+            date_str, description, amount_str, cr_flag = match.groups()
+            amount = float(amount_str.replace(",", ""))
+            if cr_flag:
+                ttype = "refund"
+                amount = -amount
+            else:
+                ttype = "expense"
+            transactions.append({
+                "date": self._normalize_date(date_str),
+                "description": description.strip(),
+                "amount": amount,
+                "transaction_type": ttype,
+            })
+        self.stated_total = self._extract_total_purchases(text)
+        return transactions
+
+    def _extract_total_purchases(self, text):
+        match = re.search(CC_TOTAL_PATTERN, text, re.IGNORECASE)
+        if match:
+            return float(match.group(1).replace(",", ""))
+        return 0.0

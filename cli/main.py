@@ -1,5 +1,6 @@
 import argparse
 import csv
+import os
 import sys
 from datetime import datetime
 
@@ -18,7 +19,6 @@ def cmd_upload(args, db):
     ingestion = FileIngestion(db)
     classifier = StatementClassifier()
     file_id = ingestion.upload(args.filepath)
-    import os
     dest = os.path.join("uploads", os.path.basename(args.filepath))
     stmt_type = classifier.classify_file(dest)
     db.cursor.execute(

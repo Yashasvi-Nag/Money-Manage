@@ -15,9 +15,10 @@ class FinancialAnalytics:
         now = datetime.now()
         monthly_totals = []
         for i in range(3):
+            # Decrement month properly using calendar arithmetic to avoid edge cases
             month = now.month - i
             year = now.year
-            while month <= 0:
+            if month <= 0:
                 month += 12
                 year -= 1
             txns = self.db.get_transactions(year=year, month=month)

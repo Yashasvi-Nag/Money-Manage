@@ -4,7 +4,8 @@ class TransactionClassifier:
         if "payment" in desc:
             return "payment"
         # "cashback reversal" must be checked before "cashback" because
-        # "cashback reversal" is a substring match of "cashback".
+        # "cashback" is a substring of "cashback reversal"; checking cashback first
+        # would incorrectly classify reversals.
         if "cashback reversal" in desc:
             return "cashback_reversal"
         if "cashback" in desc:
