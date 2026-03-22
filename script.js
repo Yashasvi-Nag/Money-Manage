@@ -131,7 +131,7 @@ function renderActivity() {
         <div><strong>${item.name}</strong></div>
         <div class="meta">${item.category} • ${item.date}</div>
       </div>
-      <div class="amount ${amountClass}">${item.amount >= 0 ? "+" : ""}${formatCurrency(item.amount)}</div>
+      <div class="amount ${amountClass}">${formatCurrency(item.amount)}</div>
     `;
     list.appendChild(li);
   });
@@ -184,7 +184,8 @@ function drawCashflowChart() {
   const ctx = canvas.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
   const width = canvas.clientWidth || 600;
-  const height = Number(canvas.getAttribute("height") || canvas.clientHeight || 260);
+  const rawHeight = canvas.getAttribute("height");
+  const height = rawHeight ? parseInt(rawHeight, 10) : canvas.clientHeight || 260;
   canvas.width = width * dpr;
   canvas.height = height * dpr;
   ctx.scale(dpr, dpr);
@@ -239,7 +240,8 @@ function drawSpendingChart() {
   const ctx = canvas.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
   const width = canvas.clientWidth || 320;
-  const height = Number(canvas.getAttribute("height") || canvas.clientHeight || 240);
+  const rawHeight = canvas.getAttribute("height");
+  const height = rawHeight ? parseInt(rawHeight, 10) : canvas.clientHeight || 240;
   canvas.width = width * dpr;
   canvas.height = height * dpr;
   ctx.scale(dpr, dpr);
