@@ -41,6 +41,8 @@ class Database:
                 source_file_id INTEGER,
                 FOREIGN KEY(source_file_id) REFERENCES raw_files(id)
             );
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_transactions_dedup
+                ON transactions(date, description, amount);
             CREATE TABLE IF NOT EXISTS assets (
                 id INTEGER PRIMARY KEY,
                 name TEXT,

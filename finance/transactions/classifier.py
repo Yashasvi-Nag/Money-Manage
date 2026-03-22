@@ -3,6 +3,8 @@ class TransactionClassifier:
         desc = description.lower()
         if "payment" in desc:
             return "payment"
+        # "cashback reversal" must be checked before "cashback" because
+        # "cashback reversal" is a substring match of "cashback".
         if "cashback reversal" in desc:
             return "cashback_reversal"
         if "cashback" in desc:

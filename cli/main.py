@@ -37,7 +37,6 @@ def cmd_parse(args, db):
         return
     txn_classifier = TransactionClassifier()
     categorizer = Categorizer(db)
-    factory = ParserFactory()
     import os
     for f in files:
         path = os.path.join("uploads", f["filename"])
@@ -45,7 +44,7 @@ def cmd_parse(args, db):
             print(f"File not found: {path}")
             continue
         stmt_type = f.get("statement_type") or "UNKNOWN"
-        parser = factory.get_parser(stmt_type)
+        parser = ParserFactory.get_parser(stmt_type)
         try:
             transactions = parser.parse(path)
         except Exception as e:

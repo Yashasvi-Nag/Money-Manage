@@ -14,10 +14,14 @@ def read_pdf(filepath):
         import pdfplumber
         with pdfplumber.open(filepath) as pdf:
             return "\n".join(page.extract_text() or "" for page in pdf.pages)
-    except Exception:
-        import fitz
-        doc = fitz.open(filepath)
+    except ImportError:
+        pass
+    import fitz
+    doc = fitz.open(filepath)
+    try:
         return "\n".join(page.get_text() for page in doc)
+    finally:
+        doc.close()
 
 
 class BaseParser(ABC):
