@@ -126,12 +126,16 @@ function renderActivity() {
   transactions.forEach((item) => {
     const li = document.createElement("li");
     const amountClass = item.amount >= 0 ? "income" : "expense";
+    const amountText =
+      item.amount >= 0
+        ? `+${formatCurrency(item.amount)}`
+        : formatCurrency(item.amount);
     li.innerHTML = `
       <div>
         <div><strong>${item.name}</strong></div>
         <div class="meta">${item.category} • ${item.date}</div>
       </div>
-      <div class="amount ${amountClass}">${formatCurrency(item.amount)}</div>
+      <div class="amount ${amountClass}">${amountText}</div>
     `;
     list.appendChild(li);
   });
