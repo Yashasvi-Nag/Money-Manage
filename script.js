@@ -1,47 +1,47 @@
-const BASELINE_BALANCE = 24000;
+const BASELINE_BALANCE = 240000;
 const BAR_SPACING_MULTIPLIER = 2.2;
 const BAR_GAP = 8;
 const DONUT_INNER_RADIUS_RATIO = 0.55;
 
 const monthlyData = [
-  { month: "Oct", income: 5100, expenses: 3320, savings: 1780 },
-  { month: "Nov", income: 5250, expenses: 3450, savings: 1800 },
-  { month: "Dec", income: 5400, expenses: 3600, savings: 1800 },
-  { month: "Jan", income: 5580, expenses: 3680, savings: 1900 },
-  { month: "Feb", income: 5650, expenses: 3520, savings: 2130 },
-  { month: "Mar", income: 5790, expenses: 3615, savings: 2175 },
+  { month: "Oct", income: 51000, expenses: 33200, savings: 17800 },
+  { month: "Nov", income: 52500, expenses: 34500, savings: 18000 },
+  { month: "Dec", income: 54000, expenses: 36000, savings: 18000 },
+  { month: "Jan", income: 55800, expenses: 36800, savings: 19000 },
+  { month: "Feb", income: 56500, expenses: 35200, savings: 21300 },
+  { month: "Mar", income: 57900, expenses: 36150, savings: 21750 },
 ];
 
 const spendingCategories = [
-  { label: "Housing", value: 1180, color: "#7c5dff" },
-  { label: "Food", value: 640, color: "#22d3ee" },
-  { label: "Transport", value: 340, color: "#fb7185" },
-  { label: "Wellness", value: 280, color: "#34d399" },
-  { label: "Subscriptions", value: 210, color: "#f59e0b" },
-  { label: "Misc", value: 240, color: "#9ca3af" },
+  { label: "Housing", value: 11800, color: "#7c5dff" },
+  { label: "Food", value: 6400, color: "#22d3ee" },
+  { label: "Transport", value: 3400, color: "#fb7185" },
+  { label: "Wellness", value: 2800, color: "#34d399" },
+  { label: "Subscriptions", value: 2100, color: "#f59e0b" },
+  { label: "Misc", value: 2400, color: "#9ca3af" },
 ];
 
 const budgets = [
-  { name: "Housing", spent: 1180, limit: 1500 },
-  { name: "Food & Dining", spent: 640, limit: 750 },
-  { name: "Transport", spent: 340, limit: 400 },
-  { name: "Lifestyle", spent: 520, limit: 700 },
+  { name: "Housing", spent: 11800, limit: 15000 },
+  { name: "Food & Dining", spent: 6400, limit: 7500 },
+  { name: "Transport", spent: 3400, limit: 4000 },
+  { name: "Lifestyle", spent: 5200, limit: 7000 },
 ];
 
 const goals = [
-  { name: "Emergency fund", current: 6800, target: 10000 },
-  { name: "Vacation", current: 2400, target: 3500 },
-  { name: "Student loan", current: 5200, target: 8000 },
+  { name: "Emergency fund", current: 68000, target: 100000 },
+  { name: "Vacation", current: 24000, target: 35000 },
+  { name: "Student loan", current: 52000, target: 80000 },
 ];
 
 const transactions = [
-  { name: "Rent", category: "Housing", date: "Mar 05", amount: -1180 },
-  { name: "Salary", category: "Income", date: "Mar 01", amount: 5790 },
-  { name: "Groceries", category: "Food", date: "Mar 12", amount: -142 },
-  { name: "Gym membership", category: "Wellness", date: "Mar 02", amount: -48 },
-  { name: "Internet", category: "Utilities", date: "Mar 07", amount: -65 },
-  { name: "Coffee shop", category: "Lifestyle", date: "Mar 10", amount: -18 },
-  { name: "Ride share", category: "Transport", date: "Mar 11", amount: -22 },
+  { name: "Rent", category: "Housing", date: "Mar 05", amount: -11800 },
+  { name: "Salary", category: "Income", date: "Mar 01", amount: 57900 },
+  { name: "Groceries", category: "Food", date: "Mar 12", amount: -1420 },
+  { name: "Gym membership", category: "Wellness", date: "Mar 02", amount: -480 },
+  { name: "Internet", category: "Utilities", date: "Mar 07", amount: -650 },
+  { name: "Coffee shop", category: "Lifestyle", date: "Mar 10", amount: -180 },
+  { name: "Ride share", category: "Transport", date: "Mar 11", amount: -220 },
 ];
 
 const insights = [
@@ -51,9 +51,9 @@ const insights = [
   "Subscriptions are stable; consider cancelling unused trials.",
 ];
 
-const currency = new Intl.NumberFormat("en-US", {
+const currency = new Intl.NumberFormat("en-IN", {
   style: "currency",
-  currency: "USD",
+  currency: "INR",
   maximumFractionDigits: 0,
 });
 
